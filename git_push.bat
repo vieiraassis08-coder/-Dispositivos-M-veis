@@ -1,10 +1,9 @@
 @echo off
-REM Script para commitar e enviar ao GitHub (configure origin antes de rodar)
+REM Script para commitar e enviar o projeto ao GitHub
 cd /d %~dp0
 git add .
-git commit -m "Add placeholder screenshot and project files"
+git commit -m "Finalize Flexbox app and screenshots"
 git branch -M main
-echo If you don't have a remote set, run:
-echo   git remote add origin https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
+git remote set-url origin https://github.com/vieiraassis08-coder/-Dispositivos-M-veis.git
 git push -u origin main
 pause

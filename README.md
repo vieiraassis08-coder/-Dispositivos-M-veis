@@ -1,65 +1,68 @@
 # App Flexbox — Projeto Autoral
 
-Exemplo simples de app usando Flexbox e `StyleSheet.create()` (React Native / Expo).
+Aplicativo mobile desenvolvido em React Native com Expo, utilizando conceitos de Flexbox e estilização em JavaScript com `StyleSheet.create()`.
 
-## O que o projeto demonstra
+## Objetivo
 
-- Todos os estilos em `styles.js` usando `StyleSheet.create()`.
-- Separação clara entre lógica (`App.js`, `components/`) e estilos.
-- Uso de `flexDirection`, `justifyContent`, `alignItems` e `flex` em várias seções:
-  - Header (linha com logo e título)
-  - Layout principal com colunas responsivas
-  - Footer centralizado
-- Layout responsivo básico via `useWindowDimensions()` para alternar entre `row` e `column`.
+Criar uma interface responsiva e visualmente organizada, explorando:
 
-## Arquivos principais
+- layout com `flexDirection`
+- alinhamento com `justifyContent` e `alignItems`
+- distribuição dos espaços com `flex`
+- componentes reutilizáveis
+- organização da estilização em arquivo separado
 
-- [App.js](App.js)
-- [styles.js](styles.js)
-- [components/Header.js](components/Header.js)
-- [components/Card.js](components/Card.js)
+## Estrutura do projeto
 
-## Rodando localmente
+- `App.js` — montagem principal da interface
+- `styles.js` — estilos gerais do app
+- `components/Header.js` — cabeçalho do projeto
+- `components/Card.js` — cards reutilizáveis
+- `media/` — screenshots do app em web e mobile
 
-Sugestão com Expo (recomendado):
+## Tecnologias utilizadas
 
-```bash
-# instalar expo-cli se necessário
-npm install -g expo-cli
-# iniciar o projeto localmente (na pasta do projeto)
-expo init . --template blank
-# instale dependências (se necessário)
+- React Native
+- Expo
+- JavaScript
+- Flexbox
+- StyleSheet
+
+## Como executar
+
+No PowerShell, na pasta do projeto:
+
+```powershell
+cd "C:\Users\Francisco\Desktop\Flexbox"
 npm install
-# iniciar
-expo start
+npm start
 ```
 
-Obs.: o código fornecido assume um ambiente React Native/Expo. Se você já tem um projeto Expo, copie os arquivos para a pasta do projeto.
+Para abrir em Android:
 
-## Link do repositório
+```powershell
+npx expo start --android
+```
 
-Substitua pelo link do seu repositório GitHub:
+Para abrir em navegador web:
 
-https://github.com/SEU_USUARIO/SEU_REPOSITORIO
+```powershell
+npx expo start --web
+```
 
-## Print / Vídeo curto
+## Repositório GitHub
 
-- Para tirar um print no Android Emulator: `Ctrl+M` → `Take Screenshot` ou use a ferramenta do emulador.
-- No iOS Simulator: `Cmd+S` (macOS) ou `Device` → `Screenshot`.
-- Para gravar um curto vídeo de tela, use ferramentas como OBS ou as funcionalidades do próprio sistema (Windows Game Bar, QuickTime no macOS).
+https://github.com/vieiraassis08-coder/-Dispositivos-M-veis.git
 
-Inclua o print/vídeo no repositório na pasta `media/` antes de enviar ao professor.
+## Screenshots
 
----
+A interface foi validada em duas visualizações:
 
-## Placeholder de screenshot incluído
+- Web: `media/web-screenshot.svg`
+- Mobile: `media/mobile-screenshot.svg`
 
-Adicionei um placeholder de screenshot em `media/screenshot.svg`. Substitua este arquivo pelo seu print real antes de enviar ao professor.
+Esses arquivos representam a versão da tela em desktop e mobile, respectivamente.
 
-Também criei `git_push.bat` para facilitar o commit/push no Windows — ajuste o remote no script se necessário.
+## Observações
 
----
-
-Se quiser, posso:
-- Criar um `package.json` / scaffold completo do Expo aqui.
-- Adicionar um exemplo de screenshot (arquivo placeholder) e instruções de push para o GitHub.
+Este projeto atende à proposta da unidade de estilização em React Native, com foco no uso de Flexbox e CSS-in-JS, além de uma interface responsiva e organizada para uso do usuário.
