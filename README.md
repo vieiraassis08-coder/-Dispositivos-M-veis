@@ -1,29 +1,37 @@
 # App Flexbox — Projeto Autoral
 
-Aplicativo desenvolvido em React Native com Expo, com foco em Flexbox, organização visual e renderização condicional.
+Aplicativo desenvolvido em React Native com Expo, com foco em Flexbox, organização visual, renderização condicional e uso de estado com eventos de interação.
 
 ## Objetivo
 
-Criar uma interface responsiva e visualmente organizada, utilizando:
+Criar uma interface responsiva e interativa, utilizando:
 
 - `StyleSheet.create()` para estilização em JavaScript
 - `flexDirection`, `justifyContent`, `alignItems` e `flex` para layout
-- componentes reutilizáveis
-- renderização condicional para exibir conteúdos conforme o estado da aplicação
+- `useState` para controlar estados da interface
+- `TextInput`, botões e filtros para interação com o usuário
+- componentes reutilizáveis e organização visual do app
 
-## Atividade 2 — Renderização condicional
+## Atividade 3 — Estado e interação
 
-O projeto foi atualizado para incluir dois exemplos práticos de renderização condicional:
+O projeto foi atualizado para incluir exemplos práticos de uso de estado e eventos de interação:
 
-1. Status do usuário
-   - quando o usuário está online, é exibida a mensagem “Disponível agora”
-   - quando está offline, aparece “Offline no momento”
+1. Campo de texto controlado
+   - o nome do usuário é digitado em um `TextInput` e controlado por estado
 
-2. Controle de estoque
-   - quando um produto tem estoque, aparece a quantidade disponível e o botão “Comprar”
-   - quando não há estoque, aparece “Sem estoque no momento” e o botão fica indisponível
+2. Toggle de status
+   - ao pressionar o botão, o usuário alterna entre online e offline
 
-Esses exemplos foram integrados ao layout principal de forma coerente com a proposta do projeto.
+3. Adição de tarefas
+   - o usuário digita o texto da tarefa e a adiciona por meio de botão
+
+4. Filtro de categorias
+   - a lista de tarefas pode ser filtrada por categoria
+
+5. Contador de quantidade
+   - o usuário aumenta ou diminui a quantidade do pedido por interações
+
+Esses elementos foram integrados ao layout principal de forma coerente com a proposta do projeto, demonstrando estados dinâmicos e respostas a ações do usuário.
 
 ## Tecnologias utilizadas
 
@@ -32,10 +40,13 @@ Esses exemplos foram integrados ao layout principal de forma coerente com a prop
 - JavaScript
 - Flexbox
 - StyleSheet
+- useState
+- TextInput
+- Pressable
 
 ## Estrutura do projeto
 
-- `App.js` — estrutura principal da interface
+- `App.js` — estrutura principal da interface e lógica de estado
 - `styles.js` — estilos gerais do app
 - `components/Header.js` — cabeçalho do app
 - `components/Card.js` — cards reutilizáveis
@@ -75,12 +86,16 @@ https://github.com/vieiraassis08-coder/-Dispositivos-M-veis.git
 
 ![Web screenshot 2](media/web-atv2.png)
 
+![Web screenshot 3](media/web-atv3.png)
+
 ### Mobile
 
 ![Mobile screenshot 1](media/mobile-atv1.jpeg)
 
 ![Mobile screenshot 2](media/mobile-atv2.jpeg)
 
+![Mobile screenshot 3](media/mobile-atv3.jpeg)
+
 ## Observações
 
-Este projeto atende à proposta da unidade de estilização e renderização condicional em React Native, demonstrando uso prático de layout responsivo e lógica de interface dinâmica.
+Este projeto atende às propostas de estilização, renderização condicional e gerenciamento de estado em React Native, demonstrando uso prático de interações do usuário e organização de interface dinâmica.
