@@ -1,0 +1,10 @@
+node_modules/
+.expo/
+.vscode/
+.DS_Store
+npm-debug.log
+yarn-error.log
+android/
+ios/
+*.log
+media/screenshot.svg
