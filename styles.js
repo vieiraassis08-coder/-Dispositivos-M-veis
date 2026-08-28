@@ -188,6 +188,12 @@ export default StyleSheet.create({
     color: '#4a90e2',
     marginLeft: 8,
   },
+  firebaseText: {
+    marginTop: 10,
+    color: '#475569',
+    fontSize: 12,
+    fontStyle: 'italic',
+  },
 
   productSection: {
     backgroundColor: '#fff',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   View,
@@ -11,6 +11,7 @@ import {
 import Header from './components/Header';
 import Card from './components/Card';
 import styles from './styles';
+import { db, firebaseReady, collection, addDoc, getDocs } from './firebase';
 
 export default function App() {
   const { width } = useWindowDimensions();
@@ -25,6 +26,7 @@ export default function App() {
   ]);
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   const [quantity, setQuantity] = useState(1);
+  const [firebaseMessage, setFirebaseMessage] = useState('');
 
   const categories = ['Todos', 'Pessoal', 'Trabalho', 'Estudo'];
 
@@ -39,15 +41,60 @@ export default function App() {
       ? tasks
       : tasks.filter((task) => task.category === selectedCategory);
 
-  const addTask = () => {
+  useEffect(() => {
+    const loadTasksFromFirebase = async () => {
+      if (!db) {
+        setFirebaseMessage('Firebase ainda não configurado. Configure o projeto para salvar os dados.');
+        return;
+      }
+
+      try {
+        const snapshot = await getDocs(collection(db, 'tasks'));
+        const firebaseTasks = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          text: doc.data().text,
+          category: doc.data().category,
+        }));
+
+        if (firebaseTasks.length > 0) {
+          setTasks(firebaseTasks);
+          setFirebaseMessage('Dados carregados do Firebase com sucesso.');
+        } else {
+          setFirebaseMessage('Firebase conectado, mas ainda não há tarefas salvas.');
+        }
+      } catch (error) {
+        setFirebaseMessage('Não foi possível carregar os dados do Firebase.');
+      }
+    };
+
+    loadTasksFromFirebase();
+  }, []);
+
+  const addTask = async () => {
     if (!taskInput.trim()) return;
 
     const category = selectedCategory === 'Todos' ? 'Pessoal' : selectedCategory;
+    const newTask = { text: taskInput.trim(), category };
 
-    setTasks((currentTasks) => [
-      ...currentTasks,
-      { id: Date.now(), text: taskInput.trim(), category },
-    ]);
+    if (db) {
+      try {
+        const docRef = await addDoc(collection(db, 'tasks'), newTask);
+        setTasks((currentTasks) => [
+          ...currentTasks,
+          { ...newTask, id: docRef.id },
+        ]);
+        setFirebaseMessage('Tarefa salva no Firebase.');
+      } catch (error) {
+        setFirebaseMessage('Erro ao salvar no Firebase.');
+      }
+    } else {
+      setTasks((currentTasks) => [
+        ...currentTasks,
+        { id: Date.now(), ...newTask },
+      ]);
+      setFirebaseMessage('Firebase não configurado, dados salvos localmente.');
+    }
+
     setTaskInput('');
   };
 
@@ -120,6 +167,8 @@ export default function App() {
                 <Text style={styles.taskCategory}>{task.category}</Text>
               </View>
             ))}
+
+            {firebaseMessage ? <Text style={styles.firebaseText}>{firebaseMessage}</Text> : null}
           </View>
         </View>
 
