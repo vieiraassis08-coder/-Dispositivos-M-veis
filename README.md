@@ -1,24 +1,29 @@
 # App Flexbox — Projeto Autoral
 
-Aplicativo mobile desenvolvido em React Native com Expo, utilizando conceitos de Flexbox e estilização em JavaScript com `StyleSheet.create()`.
+Aplicativo desenvolvido em React Native com Expo, com foco em Flexbox, organização visual e renderização condicional.
 
 ## Objetivo
 
-Criar uma interface responsiva e visualmente organizada, explorando:
+Criar uma interface responsiva e visualmente organizada, utilizando:
 
-- layout com `flexDirection`
-- alinhamento com `justifyContent` e `alignItems`
-- distribuição dos espaços com `flex`
+- `StyleSheet.create()` para estilização em JavaScript
+- `flexDirection`, `justifyContent`, `alignItems` e `flex` para layout
 - componentes reutilizáveis
-- organização da estilização em arquivo separado
+- renderização condicional para exibir conteúdos conforme o estado da aplicação
 
-## Estrutura do projeto
+## Atividade 2 — Renderização condicional
 
-- `App.js` — montagem principal da interface
-- `styles.js` — estilos gerais do app
-- `components/Header.js` — cabeçalho do projeto
-- `components/Card.js` — cards reutilizáveis
-- `media/` — screenshots do app em web e mobile
+O projeto foi atualizado para incluir dois exemplos práticos de renderização condicional:
+
+1. Status do usuário
+   - quando o usuário está online, é exibida a mensagem “Disponível agora”
+   - quando está offline, aparece “Offline no momento”
+
+2. Controle de estoque
+   - quando um produto tem estoque, aparece a quantidade disponível e o botão “Comprar”
+   - quando não há estoque, aparece “Sem estoque no momento” e o botão fica indisponível
+
+Esses exemplos foram integrados ao layout principal de forma coerente com a proposta do projeto.
 
 ## Tecnologias utilizadas
 
@@ -27,6 +32,14 @@ Criar uma interface responsiva e visualmente organizada, explorando:
 - JavaScript
 - Flexbox
 - StyleSheet
+
+## Estrutura do projeto
+
+- `App.js` — estrutura principal da interface
+- `styles.js` — estilos gerais do app
+- `components/Header.js` — cabeçalho do app
+- `components/Card.js` — cards reutilizáveis
+- `media/` — screenshots do projeto em web e mobile
 
 ## Como executar
 
@@ -38,16 +51,16 @@ npm install
 npm start
 ```
 
-Para abrir em Android:
-
-```powershell
-npx expo start --android
-```
-
 Para abrir em navegador web:
 
 ```powershell
 npx expo start --web
+```
+
+Para abrir no Android:
+
+```powershell
+npx expo start --android
 ```
 
 ## Repositório GitHub
@@ -56,14 +69,18 @@ https://github.com/vieiraassis08-coder/-Dispositivos-M-veis.git
 
 ## Screenshots
 
-A interface foi validada em duas visualizações:
+### Web
 
-![Web screenshot](media/web-screenshot.svg)
+![Web screenshot 1](media/web-atv1.png)
 
-![Mobile screenshot](media/mobile-screenshot.svg)
+![Web screenshot 2](media/web-atv2.png)
 
-Esses arquivos representam a versão da tela em desktop e mobile, respectivamente.
+### Mobile
+
+![Mobile screenshot 1](media/mobile-atv1.jpeg)
+
+![Mobile screenshot 2](media/mobile-atv2.jpeg)
 
 ## Observações
 
-Este projeto atende à proposta da unidade de estilização em React Native, com foco no uso de Flexbox e CSS-in-JS, além de uma interface responsiva e organizada para uso do usuário.
+Este projeto atende à proposta da unidade de estilização e renderização condicional em React Native, demonstrando uso prático de layout responsivo e lógica de interface dinâmica.
