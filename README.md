@@ -58,8 +58,9 @@ https://github.com/vieiraassis08-coder/-Dispositivos-M-veis.git
 
 A interface foi validada em duas visualizações:
 
-- Web: `media/web-screenshot.svg`
-- Mobile: `media/mobile-screenshot.svg`
+![Web screenshot](media/web-screenshot.svg)
+
+![Mobile screenshot](media/mobile-screenshot.svg)
 
 Esses arquivos representam a versão da tela em desktop e mobile, respectivamente.
 
