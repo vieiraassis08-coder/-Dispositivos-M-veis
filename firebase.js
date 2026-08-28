@@ -2,12 +2,13 @@ import { initializeApp, getApps } from 'firebase/app';
 import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT_ID.appspot.com',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: 'AIzaSyD-46Htw-GDGjMRbIY3NZFeZliUGMwRzkY',
+  authDomain: 'flexbox-4aeba.firebaseapp.com',
+  projectId: 'flexbox-4aeba',
+  storageBucket: 'flexbox-4aeba.firebasestorage.app',
+  messagingSenderId: '430069397632',
+  appId: '1:430069397632:web:ab3b7cb4aca76ba81ace65',
+  measurementId: 'G-YCH5DPGPB0',
 };
 
 const firebaseReady = Object.values(firebaseConfig).every(
