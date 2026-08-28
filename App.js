@@ -7,6 +7,7 @@ import {
   useWindowDimensions,
   TextInput,
   Pressable,
+  ScrollView,
 } from 'react-native';
 import Header from './components/Header';
 import Card from './components/Card';
@@ -103,120 +104,127 @@ export default function App() {
       <StatusBar barStyle="dark-content" />
       <Header />
 
-      <View style={[styles.main, isWide ? styles.row : styles.column]}>
-        <View style={styles.leftColumn}>
-          <Card title="Perfil" content="Informações do usuário e resumo rápido." />
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={[styles.main, isWide ? styles.row : styles.column]}>
+          <View style={styles.leftColumn}>
+            <Card title="Perfil" content="Informações do usuário e resumo rápido." />
 
-          <View style={styles.infoBox}>
-            <Text style={styles.sectionTitle}>Status do usuário</Text>
-            <TextInput
-              value={userName}
-              onChangeText={setUserName}
-              placeholder="Digite seu nome"
-              style={styles.input}
-            />
+            <View style={styles.infoBox}>
+              <Text style={styles.sectionTitle}>Status do usuário</Text>
+              <TextInput
+                value={userName}
+                onChangeText={setUserName}
+                placeholder="Digite seu nome"
+                style={styles.input}
+              />
 
-            <Pressable
-              style={[styles.toggleButton, isOnline ? styles.toggleButtonOn : styles.toggleButtonOff]}
-              onPress={() => setIsOnline((prev) => !prev)}
-            >
-              <Text style={styles.toggleButtonText}>{isOnline ? 'Disponível agora' : 'Offline no momento'}</Text>
-            </Pressable>
+              <Pressable
+                style={[styles.toggleButton, isOnline ? styles.toggleButtonOn : styles.toggleButtonOff]}
+                onPress={() => setIsOnline((prev) => !prev)}
+              >
+                <Text style={styles.toggleButtonText}>{isOnline ? 'Disponível agora' : 'Offline no momento'}</Text>
+              </Pressable>
+            </View>
+
+            <View style={styles.taskBox}>
+              <Text style={styles.sectionTitle}>Lista de tarefas</Text>
+
+              <View style={styles.filterRow}>
+                {categories.map((category) => (
+                  <Pressable
+                    key={category}
+                    style={[
+                      styles.filterButton,
+                      selectedCategory === category && styles.filterButtonActive,
+                    ]}
+                    onPress={() => setSelectedCategory(category)}
+                  >
+                    <Text
+                      style={[
+                        styles.filterButtonText,
+                        selectedCategory === category && styles.filterButtonTextActive,
+                      ]}
+                    >
+                      {category}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+
+              <View style={styles.taskInputRow}>
+                <TextInput
+                  value={taskInput}
+                  onChangeText={setTaskInput}
+                  placeholder="Nova tarefa"
+                  style={[styles.input, styles.taskInput]}
+                />
+                <Pressable style={styles.addButton} onPress={addTask}>
+                  <Text style={styles.addButtonText}>Adicionar</Text>
+                </Pressable>
+              </View>
+
+              {filteredTasks.map((task) => (
+                <View key={task.id} style={styles.taskItem}>
+                  <Text style={styles.taskText}>• {task.text}</Text>
+                  <Text style={styles.taskCategory}>{task.category}</Text>
+                </View>
+              ))}
+
+              {firebaseMessage ? <Text style={styles.firebaseText}>{firebaseMessage}</Text> : null}
+            </View>
           </View>
 
-          <View style={styles.taskBox}>
-            <Text style={styles.sectionTitle}>Lista de tarefas</Text>
+          <View style={styles.rightColumn}>
+            <Card title="Detalhes" content="Conteúdo mais amplo, usa flex para ocupar espaço." large />
 
-            <View style={styles.filterRow}>
-              {categories.map((category) => (
-                <Pressable
-                  key={category}
-                  style={[
-                    styles.filterButton,
-                    selectedCategory === category && styles.filterButtonActive,
-                  ]}
-                  onPress={() => setSelectedCategory(category)}
-                >
-                  <Text
-                    style={[
-                      styles.filterButtonText,
-                      selectedCategory === category && styles.filterButtonTextActive,
-                    ]}
-                  >
-                    {category}
-                  </Text>
-                </Pressable>
+            <View style={styles.productSection}>
+              <Text style={styles.sectionTitle}>Estoque</Text>
+
+              {products.map((product) => (
+                <View key={product.id} style={styles.productCard}>
+                  <View style={styles.productHeader}>
+                    <Text style={styles.productName}>{product.name}</Text>
+                    <Text style={styles.productPrice}>{product.price}</Text>
+                  </View>
+
+                  {product.stock > 0 ? (
+                    <Text style={styles.stockAvailable}>Em estoque: {product.stock} unidades</Text>
+                  ) : (
+                    <Text style={styles.stockUnavailable}>Sem estoque no momento</Text>
+                  )}
+
+                  {product.stock > 0 ? (
+                    <Text style={styles.actionButton}>Comprar</Text>
+                  ) : (
+                    <Text style={styles.actionButtonDisabled}>Indisponível</Text>
+                  )}
+                </View>
               ))}
             </View>
 
-            <View style={styles.taskInputRow}>
-              <TextInput
-                value={taskInput}
-                onChangeText={setTaskInput}
-                placeholder="Nova tarefa"
-                style={[styles.input, styles.taskInput]}
-              />
-              <Pressable style={styles.addButton} onPress={addTask}>
-                <Text style={styles.addButtonText}>Adicionar</Text>
-              </Pressable>
-            </View>
+            <View style={styles.quantityBox}>
+              <Text style={styles.sectionTitle}>Quantidade do pedido</Text>
+              <View style={styles.quantityRow}>
+                <Pressable style={styles.qtyButton} onPress={() => setQuantity((prev) => Math.max(prev - 1, 1))}>
+                  <Text style={styles.qtyButtonText}>-</Text>
+                </Pressable>
 
-            {filteredTasks.map((task) => (
-              <View key={task.id} style={styles.taskItem}>
-                <Text style={styles.taskText}>• {task.text}</Text>
-                <Text style={styles.taskCategory}>{task.category}</Text>
+                <Text style={styles.quantityValue}>{quantity}</Text>
+
+                <Pressable style={styles.qtyButton} onPress={() => setQuantity((prev) => prev + 1)}>
+                  <Text style={styles.qtyButtonText}>+</Text>
+                </Pressable>
               </View>
-            ))}
-
-            {firebaseMessage ? <Text style={styles.firebaseText}>{firebaseMessage}</Text> : null}
+              <Text style={styles.quantityInfo}>Olá, {userName}! Você selecionou {quantity} item(ns).</Text>
+            </View>
           </View>
         </View>
-
-        <View style={styles.rightColumn}>
-          <Card title="Detalhes" content="Conteúdo mais amplo, usa flex para ocupar espaço." large />
-
-          <View style={styles.productSection}>
-            <Text style={styles.sectionTitle}>Estoque</Text>
-
-            {products.map((product) => (
-              <View key={product.id} style={styles.productCard}>
-                <View style={styles.productHeader}>
-                  <Text style={styles.productName}>{product.name}</Text>
-                  <Text style={styles.productPrice}>{product.price}</Text>
-                </View>
-
-                {product.stock > 0 ? (
-                  <Text style={styles.stockAvailable}>Em estoque: {product.stock} unidades</Text>
-                ) : (
-                  <Text style={styles.stockUnavailable}>Sem estoque no momento</Text>
-                )}
-
-                {product.stock > 0 ? (
-                  <Text style={styles.actionButton}>Comprar</Text>
-                ) : (
-                  <Text style={styles.actionButtonDisabled}>Indisponível</Text>
-                )}
-              </View>
-            ))}
-          </View>
-
-          <View style={styles.quantityBox}>
-            <Text style={styles.sectionTitle}>Quantidade do pedido</Text>
-            <View style={styles.quantityRow}>
-              <Pressable style={styles.qtyButton} onPress={() => setQuantity((prev) => Math.max(prev - 1, 1))}>
-                <Text style={styles.qtyButtonText}>-</Text>
-              </Pressable>
-
-              <Text style={styles.quantityValue}>{quantity}</Text>
-
-              <Pressable style={styles.qtyButton} onPress={() => setQuantity((prev) => prev + 1)}>
-                <Text style={styles.qtyButtonText}>+</Text>
-              </Pressable>
-            </View>
-            <Text style={styles.quantityInfo}>Olá, {userName}! Você selecionou {quantity} item(ns).</Text>
-          </View>
-        </View>
-      </View>
+      </ScrollView>
 
       <View style={styles.footer}>
         <Text style={styles.footerText}>Feito com Flexbox • Projeto autoral</Text>

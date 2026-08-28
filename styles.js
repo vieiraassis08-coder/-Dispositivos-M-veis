@@ -27,10 +27,19 @@ export default StyleSheet.create({
     fontWeight: '700',
   },
 
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: 24,
+  },
+
   /* Main layout */
   main: {
     flex: 1,
     padding: 16,
+    minHeight: '100%',
   },
   row: {
     flexDirection: 'row',
@@ -42,11 +51,13 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     gap: 12,
+    minWidth: 0,
   },
   rightColumn: {
     flex: 2,
     marginLeft: 12,
     gap: 12,
+    minWidth: 0,
   },
 
   /* Card */
